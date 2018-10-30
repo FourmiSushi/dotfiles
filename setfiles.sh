@@ -4,6 +4,7 @@ printf "password: "
 read password
 echo "$password" | sudo -S pacman -Syu
 echo "$password" | sudo -S pacman -S alacritty neovim yay-bin
+echo "$password" | sudo -S pacman -Rs variety
 echo "$password" | sudo -S pip install neovim
 
 mkdir -p $HOME/.config/nvim
