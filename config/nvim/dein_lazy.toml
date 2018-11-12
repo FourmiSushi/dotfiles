@@ -97,6 +97,9 @@ repo = 'elixir-editors/vim-elixir'
 on_ft = 'elixir'
 
 [[plugins]]
-repo = 'kbrw/elixir.nvim'
+repo = 'mattreduce/vim-mix'
 on_ft = 'elixir'
 
+[[plugins]]
+repo = 'slashmili/alchemist.vim'
+on_ft = 'elixir'
