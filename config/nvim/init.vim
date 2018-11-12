@@ -67,6 +67,7 @@ set smartindent
 set showmatch matchtime=1
 set backspace=start,eol,indent
 set virtualedit+=block
+set conceallevel=0
 
 "検索だけど
 set hlsearch
