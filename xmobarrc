@@ -1,0 +1,16 @@
+Config { font = "-misc-fixed-*-*-*-*-10-*-*-*-*-*-*-*"
+       , bgColor = "#6e5773"
+       , fgColor = "#e9e2d0"
+       , position = Bottom
+       , lowerOnStart = True
+       , commands = [ Run Weather "RJTT" ["-t","Tokyo: <tempC>C","-L","5","-H","15","--normal","#e9e2d0","--high","#d45d79","--low","#ea9085"] 36000
+                    , Run Cpu ["-L","3","-H","50","--normal","#e9e2d0","--high","#d45d79"] 10
+                    , Run Memory ["-t","Mem: <usedratio>%"] 10
+                    , Run Com "uname" ["-s","-r"] "" 36000
+    		            , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
+            , Run StdinReader
+            ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = " %StdinReader% }{ %cpu% %memory% | <fc=#ea9085>%date%</fc>| %RJTT% | %uname% "
+       }
