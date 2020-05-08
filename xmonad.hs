@@ -28,7 +28,7 @@ lighterColor = "#ea9085"
 whiteColor = "#e9e2d0"
 
 myTerminal = "alacritty"
-myFileManager = "nautilus --new-window"
+myFileManager = "thunar"
 myScreenshotRegion = "flameshot gui"
 myScreenshotCopy = "flameshot screen -c"
 myScreenshotSave = "flameshot screen"
