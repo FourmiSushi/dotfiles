@@ -38,9 +38,7 @@ cpu_usage {
 }
 
 memory {
-        format = "MEM: %percentage_free"
-        threshold_degraded = "1G"
-        format_degraded = "MEMORY < %available"
+        format = "MEM: %percentage_used"
 }
 
 tztime local {

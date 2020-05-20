@@ -6,7 +6,7 @@ set $down j
 set $left h
 set $right l
 
-set $firstMonitor HDMI-0
+set $firstMonitor eDP-1
 
 set $black      #6e5773
 set $darker     #d45d79
@@ -144,7 +144,7 @@ font pango:Source Han Sans JP Regular 9
 
 # 下のバー
 bar {
-        output                  HDMI-0
+        output                  $firstMonitor
         status_command          i3status
         position                bottom
         mode                    dock
