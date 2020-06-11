@@ -21,6 +21,9 @@ function clean_before_install() {
 	if [[ -e ~/.config/i3status/config ]] || [[ -L ~/.config/i3status/config ]]; then
 	rm -rf ~/.config/i3status/config
 	fi
+	if [[ -e ~/.profile ]] || [[ -L ~/.profile ]]; then
+	rm -rf ~/.profile
+	fi
 }
 
 function make_dir_if_not_exists() {
@@ -54,3 +57,4 @@ ln -s $script_dir/dunstrc ~/.config/dunst/dunstrc
 # ln -s $script_dir/xmonad.hs ~/.xmonad/xmonad.hs
 ln -s $script_dir/i3/config ~/.config/i3/config
 ln -s $script_dir/i3status/config ~/.config/i3status/config
+ln -s $script_dir/profile ~/.profile
