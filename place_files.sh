@@ -24,6 +24,9 @@ function clean_before_install() {
 	if [[ -e ~/.profile ]] || [[ -L ~/.profile ]]; then
 	rm -rf ~/.profile
 	fi
+	if [[ -e ~/.gitconfig ]] || [[ -L ~/.gitconfig ]]; then
+	rm -rf ~/.gitconfig
+	fi
 }
 
 function make_dir_if_not_exists() {
@@ -58,3 +61,4 @@ ln -s $script_dir/dunstrc ~/.config/dunst/dunstrc
 ln -s $script_dir/i3/config ~/.config/i3/config
 ln -s $script_dir/i3status/config ~/.config/i3status/config
 ln -s $script_dir/profile ~/.profile
+ln -s $script_dir/gitconfig ~/.gitconfig
