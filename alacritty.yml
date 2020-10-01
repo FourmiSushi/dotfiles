@@ -37,7 +37,7 @@ colors:
     cyan:    '#9aedfe'
     white:   '#e6e6e6'
 
-dynamic_title: true
+window.dynamic_title: true
 
 live_config_reload: true
 

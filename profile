@@ -4,3 +4,4 @@ export XMODIFIERS=@im=fcitx
 export DefaultIMModule=fcitx
 export PATH=~/.roswell/bin:$PATH
 export PATH=~/.local/bin:$PATH
+eval `opam config env`
