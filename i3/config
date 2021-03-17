@@ -7,6 +7,7 @@ set $left h
 set $right l
 
 set $firstMonitor HDMI-0
+# set $secondMonitor DP-2
 
 set $black      #6e5773
 set $darker     #d45d79
