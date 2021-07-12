@@ -56,14 +56,12 @@ bindsym $mod+Shift+s exec --no-startup-id flameshot gui
 # ログアウトなどの
 bindsym $mod+Shift+r reload; restart
 
-set $Locker i3lock -i ~/Wallpapers/kabegami.png -e && sleep 1
-
-set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+set $mode_system System (l) logout, (k) lock, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
-    bindsym l           exec --no-startup-id i3exit $Locker, mode "default"
-    bindsym e           exec --no-startup-id i3-msg exit, mode "default"
-    bindsym s           exec --no-startup-id $Locker && systemctl suspend, mode "default"
-    bindsym h           exec --no-startup-id $Locker && systemctl hibernate, mode "default"
+    bindsym k           exec --no-startup-id xsecurelock, mode "default"
+    bindsym l           exec --no-startup-id i3-msg exit, mode "default"
+    bindsym s           exec --no-startup-id xsecurelock && systemctl suspend, mode "default"
+    bindsym h           exec --no-startup-id xsecurelock && systemctl hibernate, mode "default"
     bindsym r           exec --no-startup-id systemctl reboot, mode "default"
     bindsym Shift+s     exec --no-startup-id systemctl poweroff -i, mode "default"
 
@@ -170,5 +168,5 @@ bar {
 
 
 # 起動時アプリケーション
-exec --no-startup-id feh --bg-scale --randomize ~/Wallpapers
+exec --no-startup-id feh --bg-fill --randomize ~/Wallpapers
 exec --no-startup-id fcitx
