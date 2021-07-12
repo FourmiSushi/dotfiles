@@ -15,16 +15,16 @@ command=pamixer --get-volume-human | awk '{if ($0 == "muted") {print "---"} else
 interval=1
 
 [cpu]
-command=vmstat | tail -n 1 | awk '{user=$13; sys=$14; idle=$15; printf("U: %02d%% S: %02d%%\n", user, sys); printf("CPU: %02d%%\n", user+sys); if (idle < 20){print "#ea9085"}}'
+command=vmstat | tail -n 1 | awk '{user=$13; sys=$14; idle=$15; printf("U: %02d%% S: %02d%%\n", user, sys); printf("CPU: %02d%%\n", user+sys); if (strtonum(idle) < 20){print "#ea9085"}}'
 color=#e9e2d0
 interval=5
 
 [memory]
-command=free -h | awk 'NR == 2 {printf("%.1f/%.1f [GiB]\n%.1fGiB\n", $3, $2, $3); if ($4 < 1.0) {print "#ea9085"}}'
+command=free -h | awk 'NR == 2 {printf("%.1f/%.1f [GiB]\n%.1fGiB\n", $3, $2, $3); if (strtonum($4) < 1.0) {print "#ea9085"}}'
 interval=5
 
 [battery]
-command=acpi | awk '{status="BAT"; if (match($3,"Charging")) {status="CHR";} percent=$4; remaining=substr($5, 0, 5); printf("%s %d%% %s\n", status, percent, remaining); print percent; if (percent < 10 && status != "CHR") {print "#ea9085"}}'
+command=acpi | awk '{status="BAT"; if (match($3,"Charging")) {status="CHR";} percent=$4; remaining=substr($5, 0, 5); printf("%s %d%% %s\n", status, percent, remaining); print percent; if (strtonum(percent) < 10 && status != "CHR") {print "#ea9085"}}'
 color=#e9e2d0
 interval=5
 
