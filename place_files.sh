@@ -2,24 +2,27 @@
 
 script_dir=$(cd $(dirname ${BASH_SOURCE:-$0}); pwd)
 
-function clean_before_install() {
-	if [[ -e ~/.config/alacritty/alacritty.yml ]] || [[ -L ~/.config/alacritty/alacritty.yml ]]; then
-		rm -rf ~/.config/alacritty/alacritty.yml
+function clean_configs() {
+	if [[ -e ~/.config/alacritty ]] || [[ -L ~/.config/alacritty ]]; then
+		rm -rf ~/.config/alacritty
 	fi
-	if [[ -e ~/.config/dunst/dunstrc ]] || [[ -L ~/.config/dunst/dunstrc ]]; then
-		rm -rf ~/.config/dunst/dunstrc
+	if [[ -e ~/.config/dunst ]] || [[ -L ~/.config/dunst ]]; then
+		rm -rf ~/.config/dunst
 	fi
-	#if [[ -e ~/.xmobarrc ]] || [[ -L ~/.xmobarrc ]]; then
-	#	rm -rf ~/.xmobarrc
-	#fi
-	#if [[ -e ~/.xmonad/xmonad.hs ]] || [[ -L ~/.xmonad/xmonad.hs ]]; then
-	#	rm -rf ~/.xmonad/xmonad.hs
-	#fi
-	if [[ -e ~/.config/i3/config ]] || [[ -L ~/.config/i3/config ]]; then
-	rm -rf ~/.config/i3/config
+	if [[ -e ~/.xmobarrc ]] || [[ -L ~/.xmobarrc ]]; then
+		rm -rf ~/.xmobarrc
 	fi
-	if [[ -e ~/.config/i3status/config ]] || [[ -L ~/.config/i3status/config ]]; then
-	rm -rf ~/.config/i3status/config
+	if [[ -e ~/.xmonad ]] || [[ -L ~/.xmonad ]]; then
+		rm -rf ~/.xmonad
+	fi
+	if [[ -e ~/.config/i3 ]] || [[ -L ~/.config/i3 ]]; then
+	rm -rf ~/.config/i3
+	fi
+	if [[ -e ~/.config/i3status ]] || [[ -L ~/.config/i3status ]]; then
+	rm -rf ~/.config/i3status
+	fi
+	if [[ -e ~/.config/i3blocks ]] || [[ -L ~/.config/i3blocks ]]; then
+		rm -rf ~/.config/i3blocks
 	fi
 	if [[ -e ~/.profile ]] || [[ -L ~/.profile ]]; then
 	rm -rf ~/.profile
@@ -29,36 +32,44 @@ function clean_before_install() {
 	fi
 }
 
-function make_dir_if_not_exists() {
-	if [[ ! -d ~/.config/alacritty ]]; then
-		mkdir -p ~/.config/alacritty
-	fi
-	if [[ ! -d ~/.config/dunst ]]; then
-		mkdir -p ~/.config/dunst
-	fi
-	#if [[ ! -d ~/.xmonad ]]; then
-	#	mkdir -p ~/.xmonad
-	#fi
-	if [[ ! -d ~/.config/i3 ]]; then
-	mkdir -p ~/.config/i3
-	fi
-	if [[ ! -d ~/.config/i3status ]]; then
-	mkdir -p ~/.config/i3status
-	fi
+function place_xmonad_config() {
+	ln -s $script_dir/xmobarrc ~/.xmobarrc
+	ln -s $script_dir/xmonad ~/.xmonad
 }
 
-read -p "Clean before installing dotfiles? (y/N):" yn
-case "$yn" in
-	[yY]*) clean_before_install;;
+function place_i3_config() {
+	ln -s $script_dir/i3 ~/.config/i3
+	ln -s $script_dir/i3status ~/.config/i3status
+	ln -s $script_dir/i3blocks ~/.config/i3blocks
+}
+
+pacman -Qqe yay-bin > /dev/null
+if [ "$?" = 1 ]; then
+	whiptail --yesno "yayがインストールされていません。インストールしますか？" 20 60
+	if [ "$?" = 0 ]; then
+		sh $script_dir/install_yay.sh
+	fi
+fi
+
+whiptail --yesno "パッケージをインストールしますか？" 20 60
+if [ "$?" = 0 ]; then
+	sh $script_dir/install_pkgs.sh
+fi
+
+
+whiptail --yesno "すでにある設定ファイルを削除しますか？" 20 60
+if [ "$?" = 0 ]; then
+	clean_configs
+fi
+
+choice=$(whiptail --menu "どの構成を使いますか？" 0 0 10 0 "i3+i3blocks" 1 "xmonad+xmobar" 3>&1 1>&2 2>&3)
+case "$choice" in
+	0) place_i3_config;;
+	1) place_xmonad_config;;
+	*) place_i3_config;;
 esac
 
-make_dir_if_not_exists
-
-ln -s $script_dir/alacritty.yml ~/.config/alacritty/alacritty.yml
-ln -s $script_dir/dunstrc ~/.config/dunst/dunstrc
-# ln -s $script_dir/xmobarrc ~/.xmobarrc
-# ln -s $script_dir/xmonad.hs ~/.xmonad/xmonad.hs
-ln -s $script_dir/i3/config ~/.config/i3/config
-ln -s $script_dir/i3status/config ~/.config/i3status/config
+ln -s $script_dir/alacritty ~/.config/alacritty
+ln -s $script_dir/dunst ~/.config/dunst
 ln -s $script_dir/profile ~/.profile
 ln -s $script_dir/gitconfig ~/.gitconfig
