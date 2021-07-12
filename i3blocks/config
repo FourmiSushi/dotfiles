@@ -6,7 +6,7 @@
 
 [brightness]
 label=L: 
-command=awk 'BEGIN{"brightnessctl g" | getline a; "brightnessctl m" | getline b; printf("%02d%%\n",a/b*100+0.5)}'
+command=brightnessctl | grep -o -E '[0-9]+' | awk 'NR == 3 {printf("%02d%%\n", $0)}'
 interval=1
 
 [audio]
