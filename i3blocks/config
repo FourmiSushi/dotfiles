@@ -7,12 +7,14 @@
 [brightness]
 label=L: 
 command=brightnessctl | grep -o -E '[0-9]+' | awk 'NR == 3 {printf("%02d%%\n", $0)}'
-interval=1
+interval=once
+signal=1
 
 [audio]
 label=V: 
 command=pamixer --get-volume-human | awk '{if ($0 == "muted") {print "---"} else { printf("%02d%%\n", $0)}}'
-interval=1
+interval=once
+signal=2
 
 [cpu]
 command=vmstat | tail -n 1 | awk '{user=$13; sys=$14; idle=$15; printf("U: %02d%% S: %02d%%\n", user, sys); printf("CPU: %02d%%\n", user+sys); if (strtonum(idle) < 20){print "#ea9085"}}'
