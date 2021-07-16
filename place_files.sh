@@ -33,6 +33,9 @@ function clean_configs() {
 	if [[ -e ~/.gitconfig ]] || [[ -L ~/.gitconfig ]]; then
 		rm -rf ~/.gitconfig
 	fi
+	if [[ -e ~/wallpapers ]] || [[ -L ~/wallpapers ]]; then
+		rm -rf ~/wallpapers
+	fi
 }
 
 function place_common_config() {
@@ -40,7 +43,7 @@ function place_common_config() {
 	ln -s $script_dir/dunst ~/.config/dunst
 	ln -s $script_dir/profile ~/.profile
 	ln -s $script_dir/gitconfig ~/.gitconfig
-
+	ln -s $script_dir/wallpapers ~/wallpapers
 }
 
 function place_xmonad_config() {
@@ -81,3 +84,8 @@ case "$choice" in
 0) place_i3_config ;;
 1) place_xmonad_config ;;
 esac
+
+whiptail --yesno "GitHubのSSH設定、M+ 1mnのインストール、タッチパッドの設定、キーボードの設定を行いますか？" 20 60
+if [ "$?" = 0 ]; then
+	sh $script_dir/after_place.sh
+fi

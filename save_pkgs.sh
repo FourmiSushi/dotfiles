@@ -3,4 +3,4 @@ script_dir=$(
     cd $(dirname ${BASH_SOURCE:-$0})
     pwd
 )
-yay -Qqen >$script_dir/pkg_list.txt
+yay -Qqe >$script_dir/pkg_list.txt
