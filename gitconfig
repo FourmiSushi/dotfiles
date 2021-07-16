@@ -1,3 +1,6 @@
+[init]
+    defaultBranch = デフォルト
+
 [user]
 	email = neko@fourmisushi.soy
 	name = FourmiSushi

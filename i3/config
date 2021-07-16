@@ -40,7 +40,7 @@ bindsym $mod+Shift+0 move container to workspace 10; workspace 10
 
 
 # アプリケーションの起動ショートカット
-bindsym $mod+shift+d exec --no-startup-id dmenu_run -fn 'Misc Fixed-9' -nb '#6e5773' -nf '#e9e2d0' -sb '#ea9085' -sf '#e9e2d0'
+bindsym $mod+shift+d exec --no-startup-id dmenu_run -fn 'Terminus-9' -nb '#6e5773' -nf '#e9e2d0' -sb '#ea9085' -sf '#e9e2d0'
 bindsym $mod+Return exec --no-startup-id alacritty; focus
 bindsym $mod+Shift+Return exec --no-startup-id thunar; focus
 
@@ -60,8 +60,8 @@ set $mode_system System (l) logout, (k) lock, (s) suspend, (h) hibernate, (r) re
 mode "$mode_system" {
     bindsym k           exec --no-startup-id xsecurelock, mode "default"
     bindsym l           exec --no-startup-id i3-msg exit, mode "default"
-    bindsym s           exec --no-startup-id xsecurelock && systemctl suspend, mode "default"
-    bindsym h           exec --no-startup-id xsecurelock && systemctl hibernate, mode "default"
+    bindsym s           exec --no-startup-id systemctl suspend, mode "default"
+    bindsym h           exec --no-startup-id systemctl hibernate, mode "default"
     bindsym r           exec --no-startup-id systemctl reboot, mode "default"
     bindsym Shift+s     exec --no-startup-id systemctl poweroff -i, mode "default"
 
@@ -142,7 +142,8 @@ gaps inner 2
 client.focused          $lighter $black $white $white $lighter
 client.unfocused        $black $black $white $white $black
 
-font pango:Source Han Sans JP Regular 9
+font pango:Terminus 12
+workspace_layout default
 
 
 # 下のバー
@@ -155,7 +156,7 @@ bar {
         tray_output             none
         binding_mode_indicator  yes
 
-        font 6x10
+        font pango:Terminus 9
         colors {
                 background      $black
                 statusline      $white
@@ -168,5 +169,5 @@ bar {
 
 
 # 起動時アプリケーション
-exec --no-startup-id feh --bg-fill --randomize ~/Wallpapers
+exec --no-startup-id feh --bg-fill --randomize ~/wallpapers
 exec --no-startup-id fcitx
