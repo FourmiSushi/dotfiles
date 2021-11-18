@@ -26,7 +26,7 @@ command=free -h | awk 'NR == 2 {if (match($3, "Mi")) {printf("%.1f/%.1f [GiB]\n%
 interval=5
 
 [battery]
-command=acpi | awk '{status="BAT"; if (match($3,"Charging")) {status="CHR";} percent=$4; remaining=substr($5, 0, 5); printf("%s %d%% %s\n", status, percent, remaining); print percent; if (strtonum(percent) < 10 && status != "CHR") {print "#ea9085"}}'
+command=acpi | awk '{ status="BAT"; if (match($3,"Charging")) { status="CHR"; } percent=$4; remaining=substr($5, 0, 5); if($match($5, "rate information unavailable")) { printf("no battery info\n"); printf("0%%\n"); }else { printf("%s %d%% %s\n", status, percent, remaining);  print percent; if (strtonum(percent) < 10 && status != "CHR") { print "#ea9085" }} }'
 color=#e9e2d0
 interval=5
 

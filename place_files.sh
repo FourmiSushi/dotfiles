@@ -6,8 +6,11 @@ script_dir=$(
 )
 
 function clean_configs() {
-	if [[ -e ~/.config/alacritty ]] || [[ -L ~/.config/alacritty ]]; then
-		rm -rf ~/.config/alacritty
+	# if [[ -e ~/.config/alacritty ]] || [[ -L ~/.config/alacritty ]]; then
+	# 	rm -rf ~/.config/alacritty
+	# fi
+	if [[ -e ~/.config/kitty ]] || [[ -L ~/.config/kitty ]]; then
+		rm -rf ~/.config/kitty
 	fi
 	if [[ -e ~/.config/dunst ]] || [[ -L ~/.config/dunst ]]; then
 		rm -rf ~/.config/dunst
@@ -39,7 +42,8 @@ function clean_configs() {
 }
 
 function place_common_config() {
-	ln -s $script_dir/alacritty ~/.config/alacritty
+	# ln -s $script_dir/alacritty ~/.config/alacritty
+	ln -s $script_dir/kitty ~/.config/kitty
 	ln -s $script_dir/dunst ~/.config/dunst
 	ln -s $script_dir/profile ~/.profile
 	ln -s $script_dir/gitconfig ~/.gitconfig
